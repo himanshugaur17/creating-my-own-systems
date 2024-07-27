@@ -48,7 +48,10 @@ public class HashRing {
         toNode.getNodeData().addAll(dataToBeMoved);
     }
 
-    public static Integer hashFxn(Node.Data nodeData) {
-        return 1;
+    public static Integer hashFxn(Integer nodeDataKey) {
+        nodeDataKey ^= (nodeDataKey << 13);
+        nodeDataKey ^= (nodeDataKey >>> 17);
+        nodeDataKey ^= (nodeDataKey << 5);
+        return nodeDataKey % MAX_NODE_POSITION_AVAILABLE;
     }
 }
