@@ -2,16 +2,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LoadBalancer {
-    public void addNode(Node node) {
+    private static final HashRing hashRing = new HashRing();
 
+    public void addNode(Integer position, Node node) {
+        hashRing.addNode(position, node);
     }
 
-    public void removeNode(Integer nodeId) {
-
+    public void removeNode(Integer position) {
+        hashRing.removeNode(position);
     }
 
-    public Node routeTraffic() {
-        return null;
+    public Node routeTraffic(Integer dataKey) {
+        return hashRing.getNode(HashRing.hashFxn(dataKey));
     }
 }
 
